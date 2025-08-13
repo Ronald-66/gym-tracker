@@ -1,0 +1,52 @@
+<h2>Mis entrenamientos</h2>
+<form id="workoutForm" action="/dashboard/workouts" method="post" style="margin-bottom:18px;">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <label>Fecha</label>
+  <input name="date" type="date" required />
+  <label>Ejercicio</label>
+  <input name="exercise" placeholder="Press banca, Sentadillas, etc" required />
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+    <div>
+      <label>Series</label>
+      <input name="sets" type="number" min="1" required />
+    </div>
+    <div>
+      <label>Reps</label>
+      <input name="reps" type="number" min="1" required />
+    </div>
+    <div>
+      <label>Peso (kg)</label>
+      <input name="weight" type="number" step="0.5" min="0" required />
+    </div>
+  </div>
+  <div class="error"></div>
+  <div style="margin-top:12px"><button class="btn" type="submit">Guardar</button></div>
+</form>
+
+<% if (!workouts.length) { %>
+  <p>No hay entrenamientos aún.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Ejercicio</th><th>Series</th><th>Reps</th><th>Peso</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      <% workouts.forEach(w => { %>
+        <tr>
+          <td><%= w.date %></td>
+          <td><%= w.exercise %></td>
+          <td><%= w.sets %></td>
+          <td><%= w.reps %></td>
+          <td><%= w.weight %></td>
+          <td style="display:flex;gap:8px;">
+            <a class="btn secondary" href="/dashboard/workouts/<%= w.id %>/edit">Editar</a>
+            <form action="/dashboard/workouts/<%= w.id %>/delete" method="post" onsubmit="return confirm('¿Eliminar?');">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button class="btn" type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>

@@ -1,0 +1,26 @@
+<h2>Editar entrenamiento</h2>
+<form action="/dashboard/workouts/<%= w.id %>" method="post">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+  <label>Fecha</label>
+  <input name="date" type="date" value="<%= w.date %>" required />
+  <label>Ejercicio</label>
+  <input name="exercise" value="<%= w.exercise %>" required />
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+    <div>
+      <label>Series</label>
+      <input name="sets" type="number" min="1" value="<%= w.sets %>" required />
+    </div>
+    <div>
+      <label>Reps</label>
+      <input name="reps" type="number" min="1" value="<%= w.reps %>" required />
+    </div>
+    <div>
+      <label>Peso (kg)</label>
+      <input name="weight" type="number" step="0.5" min="0" value="<%= w.weight %>" required />
+    </div>
+  </div>
+  <div style="margin-top:12px">
+    <button class="btn" type="submit">Actualizar</button>
+    <a class="btn secondary" href="/dashboard">Cancelar</a>
+  </div>
+</form>

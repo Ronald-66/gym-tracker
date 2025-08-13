@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title || 'Gym Tracker' %></title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <nav class="container" style="display:flex;justify-content:space-between;align-items:center;">
+    <div><a href="/">Gym Tracker</a></div>
+    <div>
+      <% if (isAuth) { %>
+        <form action="/logout" method="post" style="display:inline;">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button class="btn secondary" type="submit">Salir</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Registro</a>
+      <% } %>
+    </div>
+  </nav>
+  <main class="container">
+    <div class="card">
+      <%- body %>
+    </div>
+  </main>
+  <script src="/static/validation.js"></script>
+</body>
+</html>
