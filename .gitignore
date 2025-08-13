@@ -1,0 +1,9 @@
+node_modules
+.env
+coverage
+/.scannerwork
+/data/*.db
+/data/sessions
+/report.pdf
+/zap-*.html
+/trivy-*.txt
