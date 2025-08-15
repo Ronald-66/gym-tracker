@@ -5,8 +5,8 @@ import { db } from '../db.js';
 
 const router = Router();
 
-router.get('/login', (req, res) => res.render('login', { title: 'Iniciar sesión' }));
-router.get('/register', (req, res) => res.render('register', { title: 'Crear cuenta' }));
+router.get('/login', (req, res) => res.render('login', { title: 'Iniciar sesión', csrfToken: req.csrfToken()  }));
+router.get('/register', (req, res) => res.render('register', { title: 'Crear cuenta' , csrfToken: req.csrfToken()  }));
 
 router.post(
   '/register',
